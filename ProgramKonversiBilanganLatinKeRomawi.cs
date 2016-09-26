@@ -17,7 +17,6 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 	}
 	class ProgramKonversiBilanganLatinKeRomawi{
 		public static void Main(string[] args){
-			try {
 			int input=0;
 			string Roman="";
 			int sisa=0;
@@ -192,10 +191,6 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 				System.Console.Out.WriteLine("{0}:{1}",p.i,I);
 			Roman=m+d+c+l+x+v+I;
 			System.Console.Out.WriteLine(Roman);
-			}
-			catch (InvalidCastException e){
-				throw new Exception("Wrong Input!!",e);
-			}
 		}
 	}
 }
