@@ -2,7 +2,7 @@
 * Title               : Latin Numeral to Roman Numeral Converter (ProgramKonversiBilanganLatinKeRomawi.cs)
 * Program Description : To Convert Any Latin Numeral to Roman Numeral
 * Author              : Muhammad Hasbi, S.T.
-* Interface           : Console
+* interface           : Console
 * IDE                 : Notepad ++ v6.9.2 & Mono Project v4.2.3
 * Operating System    : Windows 8 Pro 
 */
@@ -31,7 +31,17 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 			string m="",d="",c="",l="",x="",v="",I="";
 			string seribu="M", seratus="C", sepuluh="X",satu="I";
 			System.Console.Out.WriteLine("Masukkan Angka Latin yang Ingin DiKonversi Ke Angka Romawi: ");
+			try{
 			input=System.Convert.ToInt32(System.Console.In.ReadLine());
+			}
+			catch(OverflowException){
+				System.Console.Out.WriteLine("{0} is outside the range of the Int32 Type",input);
+				goto end;
+			}
+			catch(FormatException){
+				System.Console.Out.WriteLine("{0} is not in a recognizable format",input);
+				goto end;
+			}
 			p.m=input/1000;
 			sisa=input%1000;
 			p.d=sisa/500;
@@ -190,6 +200,7 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 				System.Console.Out.WriteLine("{0}:{1}",p.v,v);
 				System.Console.Out.WriteLine("{0}:{1}",p.i,I);
 			Roman=m+d+c+l+x+v+I;
+			end:
 			System.Console.Out.WriteLine(Roman);
 		}
 	}
