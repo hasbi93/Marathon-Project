@@ -16,10 +16,26 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 		public int i,v,x,l,c,d,m;
 	}
 	class ProgramKonversiBilanganLatinKeRomawi{
-		public static void Main(string[] args){
+		public int Input(){
 			int input=0;
-			string Roman="";
-			int sisa=0;
+			try{
+			input=System.Convert.ToInt32(System.Console.In.ReadLine());
+			}
+			catch(OverflowException){
+				System.Console.Out.WriteLine("Input is outside the range of the Int32 Type");
+				input=0;
+				goto end;
+			}
+			catch(FormatException){
+				System.Console.Out.WriteLine("Input is not in a recognizable format");
+				input=0;
+				goto end;
+			}
+			end:
+			return input;
+		}
+		
+		public string ConvertToRomanNumeral(){
 			Pecahan p;
 			p.i=0;
 			p.v=0;
@@ -28,22 +44,12 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 			p.c=0;
 			p.d=0;
 			p.m=0;
-			string m="",d="",c="",l="",x="",v="",I="";
-			string seribu="M", seratus="C", sepuluh="X",satu="I";
-			System.Console.Out.WriteLine("Masukkan Angka Latin yang Ingin DiKonversi Ke Angka Romawi: ");
-			try{
-			input=System.Convert.ToInt32(System.Console.In.ReadLine());
-			}
-			catch(OverflowException){
-				System.Console.Out.WriteLine("{0} is outside the range of the Int32 Type",input);
-				goto end;
-			}
-			catch(FormatException){
-				System.Console.Out.WriteLine("{0} is not in a recognizable format",input);
-				goto end;
-			}
-			p.m=input/1000;
-			sisa=input%1000;
+			int sisa=0;
+			ProgramKonversiBilanganLatinKeRomawi P=new ProgramKonversiBilanganLatinKeRomawi();
+			System.Console.Out.WriteLine("\nMasukkan Angka Latin yang Ingin DiKonversi Ke Angka Romawi: \n");
+			int newInput=P.Input();
+			p.m=newInput/1000;
+			sisa=newInput%1000;
 			p.d=sisa/500;
 			sisa=sisa%500;
 			p.c=sisa/100;
@@ -54,6 +60,11 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 			sisa=sisa%10;
 			p.v=sisa/5;
 			p.i=sisa%5;
+			
+			string Roman="";
+			string m="",d="",c="",l="",x="",v="",I="";
+			string seribu="M", seratus="C", sepuluh="X",satu="I";
+			
 			if (p.m>0){
 				if(p.m==1){
 					m="M";
@@ -70,7 +81,7 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 			} else {
 				m="";
 			}
-			System.Console.Out.WriteLine("{0}:{1}",p.m,m);
+			
 			if (p.d>0){
 				if(p.d==1){
 					if ((p.c>0)&&(p.c<4)){
@@ -94,7 +105,7 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 			} else {
 				d="";
 			}
-			System.Console.Out.WriteLine("{0}:{1}",p.d,d);
+			
 			if (p.c>0){
 				if((p.c>0)&&(p.d==0)){
 					if (p.c==1){
@@ -116,7 +127,7 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 			} else {
 				c="";
 			}
-			System.Console.Out.WriteLine("{0}:{1}",p.c,c);
+			
 			if (p.l>0){
 				if (p.l==1){
 					if((p.x>0)&&(p.x<4)){
@@ -140,7 +151,7 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 			} else {
 				l="";
 			}
-			System.Console.Out.WriteLine("{0}:{1}",p.l,l);
+			
 				if (p.x>0){
 					if ((p.x>0)&&(p.l==0)){
 						if (p.x==1){
@@ -164,7 +175,7 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 				} else {
 					x="";
 				}
-				System.Console.Out.WriteLine("{0}:{1}",p.x,x);
+			
 				if((p.i>0)||(p.v>0)){
 					if ((p.v==1)&&(p.i==0)){
 						v="V";
@@ -197,11 +208,40 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 					I="";
 					v="";
 				}
-				System.Console.Out.WriteLine("{0}:{1}",p.v,v);
-				System.Console.Out.WriteLine("{0}:{1}",p.i,I);
-			Roman=m+d+c+l+x+v+I;
-			end:
-			System.Console.Out.WriteLine(Roman);
+				Roman=m+d+c+l+x+v+I;
+				return Roman;
+		}
+		
+		public static void Main(string[] args){
+			string newRoman="";
+			ProgramKonversiBilanganLatinKeRomawi P=new ProgramKonversiBilanganLatinKeRomawi();
+			lagi:
+			newRoman=P.ConvertToRomanNumeral();
+			System.Console.Out.WriteLine("\n{0}\n",newRoman);
+			System.Console.Out.WriteLine("\nIngin Melanjutkan Program?\n1.Ya\n2.Tidak\n");
+			ulang:
+			int pilih=0;
+			try{
+			pilih=System.Convert.ToInt32(System.Console.In.ReadLine());
+			}
+			catch(OverflowException){
+				System.Console.Out.WriteLine("Wrong Input!!\nUlangi Kembali:");
+				goto ulang;
+			}
+			catch(FormatException){
+				System.Console.Out.WriteLine("Wrong Input!!\nUlangi Kembali:");
+				goto ulang;
+			}
+			switch(pilih){
+				case 1:{
+					goto lagi;
+				}
+				case 2:{
+					goto selesai;
+				}
+			}
+			selesai:
+			Console.WriteLine("Program Selesai.");
 		}
 	}
 }
