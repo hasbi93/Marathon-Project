@@ -217,20 +217,20 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 			ProgramKonversiBilanganLatinKeRomawi P=new ProgramKonversiBilanganLatinKeRomawi();
 			lagi:
 			newRoman=P.ConvertToRomanNumeral();
-			System.Console.Out.WriteLine("\n{0}\n",newRoman);
-			System.Console.Out.WriteLine("\nIngin Melanjutkan Program?\n1.Ya\n2.Tidak\n");
+			System.Console.Out.WriteLine("\nEquivalent: {0}\n",newRoman);
 			ulang:
+			System.Console.Out.WriteLine("\nIngin Melanjutkan Program?\n1.Ya\n2.Tidak\n");
 			int pilih=0;
 			try{
 			pilih=System.Convert.ToInt32(System.Console.In.ReadLine());
 			}
 			catch(OverflowException){
 				System.Console.Out.WriteLine("Wrong Input!!\nUlangi Kembali:");
-				goto ulang;
+				goto lagi;
 			}
 			catch(FormatException){
 				System.Console.Out.WriteLine("Wrong Input!!\nUlangi Kembali:");
-				goto ulang;
+				goto lagi;
 			}
 			switch(pilih){
 				case 1:{
@@ -238,6 +238,10 @@ namespace ProgramKonversiBilanganLatinKeRomawi{
 				}
 				case 2:{
 					goto selesai;
+				}
+				default:{
+					System.Console.Out.WriteLine("\nWrong Input!!\nUlangi Kembali:");
+					goto ulang;
 				}
 			}
 			selesai:
